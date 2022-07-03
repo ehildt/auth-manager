@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/prepare.sh"
+
+check_licenses
+check_lint_staged
+gitleaks_detect
