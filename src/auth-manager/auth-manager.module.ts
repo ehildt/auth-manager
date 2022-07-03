@@ -2,7 +2,6 @@ import { argon2i, hash } from 'argon2';
 import RedisStore from 'cache-manager-ioredis';
 import { validateOrReject } from 'class-validator';
 import { Model } from 'mongoose';
-import { HttpModule } from '@nestjs/axios';
 import {
   CacheModule,
   InternalServerErrorException,
@@ -31,7 +30,6 @@ import { RefreshTokenStrategy } from './strategies/refresh-token.strategy';
 
 @Module({
   imports: [
-    HttpModule,
     JwtModule.register({}),
     ConfigModule.forRoot({
       cache: true,

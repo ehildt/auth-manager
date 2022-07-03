@@ -1,6 +1,6 @@
 {
   "name": "@cultify/auth-manager",
-  "version": "0.5.15",
+  "version": "0.5.16",
   "description": "A simple and convenient way to auth your apps ;)",
   "author": "Eugen Hildt",
   "private": false,
@@ -30,19 +30,19 @@
     "dependency-cruiser": "npx depcruise -c .dependency-cruiser.js --ts-config tsconfig.json src",
     "dependency-cruiser:graph": "npx depcruise -c .dependency-cruiser.js -x \".+.spec.ts\" -T dot ./src | dot -T png > .dependency-graph.png",
     "ts-unused-exports": "npx ts-unused-exports ./tsconfig.json",
-    "gitleaks": "docker run --rm -v $(cd .. && pwd):/app zricethezav/gitleaks -c /app/config-manager/gitleaks.toml detect -v --source=\"/app/config-manager/\" --no-git",
+    "gitleaks": "docker run --rm -v $(cd .. && pwd):/app zricethezav/gitleaks -c /app/auth-manager/gitleaks.toml detect -v --source=\"/app/auth-manager/\" --no-git",
     "docker:login": "docker login docker.hub.ideea.app.corpintra.net",
-    "docker:build": "docker build --rm --target prod -t localhost:5000/config-manager .",
-    "compose:up": "docker compose up -d mongo redis && docker compose up config-manager",
+    "docker:build": "docker build --rm --target prod -t localhost:5000/auth-manager .",
+    "compose:up": "docker compose up -d mongo redis && docker compose up auth-manager",
     "clinic:doctor": "dotenv -e ./env/clinic.env -- npx clinic doctor -- node ./dist/main.js",
     "clinic:flame": "dotenv -e ./env/clinic.env -- npx clinic flame -- node ./dist/main.js",
     "clinic:bubble": "dotenv -e ./env/clinic.env -- npx clinic bubbleprof -- node ./dist/main.js",
     "clinic:clean": "npx clinic clean",
-    "docker:build:prod": "docker build --rm --target prod -t localhost:5000/config-manager .",
-    "docker:build:dev": "docker build --rm --target dev -t localhost:5000/config-manager .",
-    "docker:tag": "docker image tag localhost:5000/config-manager cultify/config-manager",
-    "docker:publish:local": "docker push localhost:5000/config-manager",
-    "docker:publish:remote": "docker push cultify/config-manager"
+    "docker:build:prod": "docker build --rm --target prod -t localhost:5000/auth-manager .",
+    "docker:build:dev": "docker build --rm --target dev -t localhost:5000/auth-manager .",
+    "docker:tag": "docker image tag localhost:5000/auth-manager cultify/auth-manager",
+    "docker:publish:local": "docker push localhost:5000/auth-manager",
+    "docker:publish:remote": "docker push cultify/auth-manager"
   },
   "dependencies": {
     "@nestjs/common": "^8.4.7",
@@ -66,7 +66,6 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.5",
-    "short-uuid": "^4.2.0",
     "swagger-ui-express": "^4.4.0"
   },
   "devDependencies": {
