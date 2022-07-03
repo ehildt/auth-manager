@@ -1,6 +1,6 @@
 # Getting Started
 
-By default the Config-Manager starts with the following setup:
+By default the Auth-Manager starts with the following setup:
 
 ```bash
 ENV PORT=3000
@@ -12,12 +12,6 @@ ENV AUTH_MANAGER_EMAIL='super@admin.com'
 ENV AUTH_MANAGER_ACCESS_TOKEN_TTL=900
 ENV AUTH_MANAGER_REFRESH_TOKEN_TTL=604800
 ENV AUTH_MANAGER_TOKEN_SECRET='d742181c71078eb527e4fce1d47a21785bac97cb86518bf43a73acd65dbd9eb0'
-
-ENV CACHE_MANAGER_TTL=300
-ENV CACHE_MANAGER_NAMESPACE_PREFIX=''
-
-ENV CONFIG_MANAGER_TTL=300
-ENV CONFIG_MANAGER_NAMESPACE_PREFIX=''
 
 ENV REDIS_PASS='myRedisPass'
 ENV REDIS_HOST='redis'
@@ -37,8 +31,8 @@ While this is pretty neat to kickoff some quick development aka with docker comp
 ```yml
 version: '3.9'
 services:
-  config-manager:
-    container_name: config-manager
+  auth-manager:
+    container_name: auth-manager
     build:
       context: .
       dockerfile: dockerfile
@@ -57,14 +51,10 @@ services:
       - AUTH_MANAGER_EMAIL=super@admin.com
       - AUTH_MANAGER_ACCESS_TOKEN_TTL=900
       - AUTH_MANAGER_REFRESH_TOKEN_TTL=604800
-      - AUTH_MANAGER_TOKEN_SECRET=d742181c71078eb527e4fce1d47a21785bac97cb86518bf43a73acd65dbd9eb0
-      - CACHE_MANAGER_TTL=300
-      - CACHE_MANAGER_NAMESPACE_PREFIX=''
-      - CONFIG_MANAGER_TTL=300
-      - CONFIG_MANAGER_NAMESPACE_PREFIX=''
+      - AUTH_MANAGER_TOKEN_SECRET=d742181c71078eb527e4fce1d47a21785bac97cb86518bf43a73acd6
       - MONGO_USER=mongo
       - MONGO_PASS=mongo
-      - MONGO_DB_NAME=config-manager
+      - MONGO_DB_NAME=auth-manager
       - MONGO_URI=mongodb://mongo:27017
       - REDIS_PASS=myRedisPass
       - REDIS_HOST=redis
@@ -100,53 +90,45 @@ volumes:
 
 networks:
   default:
-    name: CONFIG_MANAGER_NETWORK
+    name: AUTH_MANAGER_NETWORK
 ```
 
 Running `docker compose up` should log:
 
 ```bash
-config-manager  | [Nest] 37  - 07/01/2022, 3:45:42 PM     LOG [AppConfiguration] {
-config-manager  |     "APP_CONFIG": {
-config-manager  |         "port": "3000",
-config-manager  |         "startSwagger": true
-config-manager  |     },
-config-manager  |     "AUTH_MANAGER_CONFIG": {
-config-manager  |         "username": "superadmin",
-config-manager  |         "password": "superadmin",
-config-manager  |         "email": "super@admin.com",
-config-manager  |         "accessTokenTTL": 900,
-config-manager  |         "refreshTokenTTL": 604800,
-config-manager  |         "tokenSecret": "d742181c71078eb527e4fce1d47a21785bac97cb86518bf43a73acd65dbd9eb0",
-config-manager  |         "rejectUnauthorized": false
-config-manager  |     },
-config-manager  |     "CACHE_MANAGER_CONFIG": {
-config-manager  |         "ttl": 300,
-config-manager  |         "namespacePrefix": ""
-config-manager  |     },
-config-manager  |     "CONFIG_MANAGER_CONFIG": {
-config-manager  |         "ttl": 300,
-config-manager  |         "namespacePrefix": ""
-config-manager  |     },
-config-manager  |     "MONGO_CONFIG": {
-config-manager  |         "uri": "mongodb://mongo:27017",
-config-manager  |         "ssl": false,
-config-manager  |         "sslValidate": false,
-config-manager  |         "dbName": "config-manager",
-config-manager  |         "user": "mongo",
-config-manager  |         "pass": "mongo"
-config-manager  |     },
-config-manager  |     "REDIS_CONFIG": {
-config-manager  |         "host": "redis",
-config-manager  |         "port": 6379,
-config-manager  |         "ttl": 600,
-config-manager  |         "max": 100,
-config-manager  |         "db": 0,
-config-manager  |         "password": "myRedisPass"
-config-manager  |     }
-config-manager  | }
-config-manager  | [Nest] 37  - 07/01/2022, 3:45:42 PM     LOG https://localhost:3000/api-docs-json
-config-manager  | [Nest] 37  - 07/01/2022, 3:45:42 PM     LOG https://localhost:3000/api-docs
+auth-manager  | [Nest] 37  - 07/01/2022, 3:45:42 PM     LOG [AppConfiguration] {
+auth-manager  |     "APP_CONFIG": {
+auth-manager  |         "port": "3000",
+auth-manager  |         "startSwagger": true
+auth-manager  |     },
+auth-manager  |     "AUTH_MANAGER_CONFIG": {
+auth-manager  |         "username": "superadmin",
+auth-manager  |         "password": "superadmin",
+auth-manager  |         "email": "super@admin.com",
+auth-manager  |         "accessTokenTTL": 900,
+auth-manager  |         "refreshTokenTTL": 604800,
+auth-manager  |         "tokenSecret": "d742181c71078eb527e4fce1d47a21785bac97cb86518bf43a73acd6",
+auth-manager  |         "rejectUnauthorized": false
+auth-manager  |     },
+auth-manager  |     "MONGO_CONFIG": {
+auth-manager  |         "uri": "mongodb://mongo:27017",
+auth-manager  |         "ssl": false,
+auth-manager  |         "sslValidate": false,
+auth-manager  |         "dbName": "auth-manager",
+auth-manager  |         "user": "mongo",
+auth-manager  |         "pass": "mongo"
+auth-manager  |     },
+auth-manager  |     "REDIS_CONFIG": {
+auth-manager  |         "host": "redis",
+auth-manager  |         "port": 6379,
+auth-manager  |         "ttl": 600,
+auth-manager  |         "max": 100,
+auth-manager  |         "db": 0,
+auth-manager  |         "password": "myRedisPass"
+auth-manager  |     }
+auth-manager  | }
+auth-manager  | [Nest] 37  - 07/01/2022, 3:45:42 PM     LOG https://localhost:3000/api-docs-json
+auth-manager  | [Nest] 37  - 07/01/2022, 3:45:42 PM     LOG https://localhost:3000/api-doauth
 ```
 
 ## App Settings
@@ -167,7 +149,7 @@ Otherwise you will need to signin and change those credentials at a later time b
 
 There are four roles with different permissions:
 
-- superadmin `the config-manager god`
+- superadmin `the auth-manager god`
 - moderator `read/write - cannot elevate users (demigod)`
 - consumer `readonly - cannot signin, signout, refresh`
 - member `signin, signout, refresh`
@@ -177,20 +159,16 @@ There are four roles with different permissions:
 By default a session expires after 15 minutes: `AUTH_MANAGER_ACCESS_TOKEN_TTL=900` (seconds).
 A session can be refreshed for 7 days before expiring: `AUTH_MANAGER_REFRESH_TOKEN_TTL=604800` (seconds).
 Once a session expires it cannot be refreshed and the user is forced to re-signin. To refresh a session the refresh token is used,
-which generates a new access/refresh token pair. Thus in our example an active user can stay signed in infinitely or is forced to re-signin if the session is not refreshed within 7 days. The config-manager verifies the tokens by signing them with the `AUTH_MANAGER_TOKEN_SECRET`. A common misunderstanding is that a JWT is encrypted. It's not!
+which generates a new access/refresh token pair. Thus in our example an active user can stay signed in infinitely or is forced to re-signin if the session is not refreshed within 7 days. The auth-manager verifies the tokens by signing them with the `AUTH_MANAGER_TOKEN_SECRET`. A common misunderstanding is that a JWT is encrypted. It's not!
 
-A consumer token is used by services, which don't need to authenticate but rather rely on authorization. For example our config-manager is consumed by other microservices. Thus a microservice is not a **user** but a **consumer**! All it's interested in is fetch some configuration data and thus has no need for authentication.
+A consumer token is used by services, which don't need to authenticate but rather rely on authorization. For example our auth-manager is consumed by other microservices. Thus a microservice is not a **user** but a **consumer**! All it's interested in is fetch some configuration data and thus has no need for authentication.
 
 ## HTTPS (tls/ssl)
 
-The config-manager comes with a self-signed tls/ssl setup, which does not have an expiration date.
+The auth-manager comes with a self-signed tls/ssl setup, which does not have an expiration date.
 It might be enough for you though for security reasons you might want to provide your own tls/ssl.
 Do to so replace the `127.0.0.1.crt` and `127.0.0.1.key` in the `ssl` folder. In docker you can map your tls/ssl setup with `-v $(pwd)/ssl:/usr/src/app/ssl`. If you use signed certificates you might also want to set `AUTH_MANAGER_REJECT_UNAUTHORIZED=true`.
 
-## Caching
-
-Every serviceId is stored for 300 seconds by default. To change this behavior set `CACHE_MANAGER_TTL` and `CONFIG_MANAGER_TTL` respectively. Whenever the config is altered, like by adding or removing a configId from it's serviceId (context), the ttl is being reset to 300 seconds (fallback) or whatever has been provided in the envs. There is a caveat though, namely if the envs `CACHE_MANAGER_NAMESPACE_PREFIX` and `CONFIG_MANAGER_NAMESPACE_PREFIX` share the same value. In this case when creating a serviceId using the **cache-manager**, the ttl coming from `CACHE_MANAGER_TTL` is used. However, if you alter this serviceId using the **config-manager**, then the ttl coming from the `CONFIG_MANAGER_TTL` is used. This is due to the fact that both managers share the same serviceId (context). Also, on the **cache-manager** upsert endpoint a custom ttl can be provided. As long as the serviceId (context) is not modified by any of the managers, the custom ttl is preserved. Thus if set to 0 the serviceId (context) never expires.
-
 ## Databases
 
-The config-manager requires a mongo and redis database to operate. It's a straight forward approach. Simply provide the credentials via the envs as show above in the [Getting Started](#getting-started) example.
+The auth-manager requires a mongo and redis database to operate. It's a straight forward approach. Simply provide the credentials via the envs as show above in the [Getting Started](#getting-started) example.

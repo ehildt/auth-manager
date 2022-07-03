@@ -2,9 +2,9 @@ import compression from 'compression';
 import fs from 'fs';
 import helmet from 'helmet';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
-import { AppService } from './app/app.service';
-import { ConfigFactoryService as AppFactory } from './app/configs/config-factory.service';
+import { AppModule } from './app-root/app.module';
+import { AppService } from './app-root/app.service';
+import { ConfigFactoryService as AppFactory } from './app-root/configs/config-factory.service';
 import { ConfigFactoryService as AuthFactory } from './auth-manager/configs/config-factory.service';
 
 const httpsOptions = {
@@ -27,6 +27,6 @@ const httpsOptions = {
   appService.enableOpenApi(app);
 
   await app.listen(appFactory.app.port, () =>
-    appService.logOnServerStart(appFactory, authFactory)
+    appService.logOnServerStart(appFactory, authFactory),
   );
 })();
