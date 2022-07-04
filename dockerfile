@@ -17,7 +17,7 @@ ENV AUTH_MANAGER_PASSWORD "superadmin"
 ENV AUTH_MANAGER_EMAIL "super@admin.com"
 ENV AUTH_MANAGER_ACCESS_TOKEN_TTL 900                                                            
 ENV AUTH_MANAGER_REFRESH_TOKEN_TTL 604800                                                        
-ENV AUTH_MANAGER_TOKEN_SECRET "d742181c71078eb527e4fce1d47a21785bac97cb86518bf43a73acd6"  
+ENV AUTH_MANAGER_TOKEN_SECRET "super-secret"  
 
 ENV REDIS_PASS ""
 ENV REDIS_HOST "redis"
@@ -28,7 +28,7 @@ ENV REDIS_DB_INDEX 0
 
 ENV MONGO_USER "mongo"
 ENV MONGO_PASS "mongo"
-ENV MONGO_DB_NAME "configs"
+ENV MONGO_DB_NAME "auths"
 ENV MONGO_URI "mongodb://mongo:27017"
 
 EXPOSE ${PORT}
@@ -67,7 +67,7 @@ ENV AUTH_MANAGER_PASSWORD "superadmin"
 ENV AUTH_MANAGER_EMAIL "super@admin.com"
 ENV AUTH_MANAGER_ACCESS_TOKEN_TTL 900                                                            
 ENV AUTH_MANAGER_REFRESH_TOKEN_TTL 604800                                                        
-ENV AUTH_MANAGER_TOKEN_SECRET "d742181c71078eb527e4fce1d47a21785bac97cb86518bf43a73acd6"  
+ENV AUTH_MANAGER_TOKEN_SECRET "super"  
 
 ENV REDIS_PASS ""
 ENV REDIS_HOST "redis"
@@ -78,7 +78,7 @@ ENV REDIS_DB_INDEX 0
 
 ENV MONGO_USER "mongo"
 ENV MONGO_PASS "mongo"
-ENV MONGO_DB_NAME "configs"
+ENV MONGO_DB_NAME "auths"
 ENV MONGO_URI "mongodb://mongo:27017"
 
 EXPOSE ${PORT}

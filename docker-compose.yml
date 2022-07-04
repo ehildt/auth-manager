@@ -23,7 +23,7 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongo
       - MONGO_INITDB_ROOT_PASSWORD=mongo
-      - MONGO_INITDB_DATABASE=configs
+      - MONGO_INITDB_DATABASE=auths
     volumes:
       - mongo_data:/data/db
     ports:
@@ -41,4 +41,4 @@ volumes:
 
 networks:
   default:
-    name: CONFIG_MANAGER_NETWORK
+    name: AUTH_MANAGER_NETWORK
