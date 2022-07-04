@@ -29,9 +29,6 @@ export class ConfigFactoryService {
       tokenSecret: this.configService.get<string>(
         'AuthManagerConfig.TOKEN_SECRET',
       ),
-      rejectUnauthorized: this.configService.get<boolean>(
-        'AuthManagerConfig.REJECT_UNAUTHORIZED',
-      ),
     });
   }
 

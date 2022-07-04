@@ -44,12 +44,4 @@ export class AuthManagerConfigAdapter {
       'super@admin.com'
     );
   }
-
-  get REJECT_UNAUTHORIZED(): boolean {
-    return (
-      this.copy?.REJECT_UNAUTHORIZED ??
-      process.env.AUTH_MANAGER_REJECT_UNAUTHORIZED === 'true' ??
-      false
-    );
-  }
 }
